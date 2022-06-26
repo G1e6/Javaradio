@@ -1,30 +1,67 @@
 package ru.ru.netology.javaradio.service;
 
 public class Radio {
-    private int currentRadioStationNumber;
-    private int currentVolume;
+    private int maxNumberOfRadioStations = 9;
+    private int minNumberOfRadioStations = 0;
+    private int currentRadioStationNumber = minNumberOfRadioStations;
 
+    private int maxCurrentVolume = 100;
+    private int minCurrentVolume = 0;
+    private int currentVolume = minCurrentVolume;
+
+    public Radio(int minNumberOfRadioStations, int maxNumberOfRadioStations, int minCurrentVolume, int maxCurrentVolume) {
+        this.minNumberOfRadioStations = minNumberOfRadioStations;
+        this.maxNumberOfRadioStations = maxNumberOfRadioStations;
+        this.currentRadioStationNumber = minNumberOfRadioStations;
+        this.minCurrentVolume = minCurrentVolume;
+        this.maxCurrentVolume = maxCurrentVolume;
+        this.currentVolume = minCurrentVolume;
+    }
+
+    public Radio(int size) {
+        maxNumberOfRadioStations = minNumberOfRadioStations + size;
+        maxCurrentVolume = minCurrentVolume + size;
+    }
     public int getCurrentRadioStationNumber() {
         return currentRadioStationNumber;
     }
+
+    public int getMaxNumberOfRadioStations(){
+        return maxNumberOfRadioStations;
+    }
+
+    public int getMinNumberOfRadioStations(){
+        return minNumberOfRadioStations;
+    }
+
+
+
 
     public int getCurrentVolume() {
         return currentVolume;
     }
 
+    public int getMaxCurrentVolume() {
+        return maxCurrentVolume;
+    }
+    public int getMinCurrentVolume() {
+        return minCurrentVolume;
+    }
+
+
     public void setCurrentRadioStationNumber(int newCurrentRadioStationNumber) {
 
-        if (newCurrentRadioStationNumber < 0) {
+        if (newCurrentRadioStationNumber < minNumberOfRadioStations) {
             return;
         }
-        if (newCurrentRadioStationNumber > 9) {
+        if (newCurrentRadioStationNumber > maxNumberOfRadioStations) {
             return;
         }
         currentRadioStationNumber = newCurrentRadioStationNumber;
     }
 
     public void increaseRadioStationNumber() {
-        if (currentRadioStationNumber < 9) {
+        if (currentRadioStationNumber < maxNumberOfRadioStations) {
             currentRadioStationNumber = currentRadioStationNumber + 1;
             setCurrentRadioStationNumber(currentRadioStationNumber);
 
@@ -32,14 +69,14 @@ public class Radio {
     }
 
     public void reduceRadioStationNumber() {
-        if (currentRadioStationNumber < 10) {
+        if (currentRadioStationNumber < maxNumberOfRadioStations) {
             currentRadioStationNumber = currentRadioStationNumber - 1;
         }
         setCurrentRadioStationNumber(currentRadioStationNumber);
     }
 
     public void next() {
-        if (currentRadioStationNumber == 9) {
+        if (currentRadioStationNumber == maxNumberOfRadioStations) {
             currentRadioStationNumber = 0;
             setCurrentRadioStationNumber(currentRadioStationNumber);
         }
@@ -48,7 +85,7 @@ public class Radio {
 
     public void prev() {
         if (currentRadioStationNumber == 0) {
-            currentRadioStationNumber = 9;
+            currentRadioStationNumber = maxNumberOfRadioStations;
             setCurrentRadioStationNumber(currentRadioStationNumber);
         }
 
@@ -56,38 +93,38 @@ public class Radio {
 
 
     public void setMaxNumberStation() {
-        currentRadioStationNumber = 9;
+        currentRadioStationNumber = maxNumberOfRadioStations;
     }
 
 
     public void setCurrentVolume(int newCurrentVolume) {
 
-        if (newCurrentVolume < 0) {
+        if (newCurrentVolume < minCurrentVolume) {
             return;
         }
-        if (newCurrentVolume > 10) {
+        if (newCurrentVolume > maxCurrentVolume) {
             return;
         }
         currentVolume = newCurrentVolume;
     }
 
     public void increaseVolume() {
-        if (currentVolume < 10) {
+        if (currentVolume < maxCurrentVolume) {
             currentVolume = currentVolume + 1;
             setCurrentVolume(currentVolume);
         }
     }
 
     public void reduceVolume() {
-        if (currentVolume < 11) {
+        if (currentVolume < maxCurrentVolume) {
             currentVolume = currentVolume - 1;
         }
         setCurrentVolume(currentVolume);
     }
 
     public void nextVolume() {
-        if (currentVolume == 10) {
-            currentVolume = 10;
+        if (currentVolume == maxCurrentVolume) {
+            currentVolume = maxCurrentVolume;
             setCurrentVolume(currentVolume);
         }
 
@@ -95,12 +132,12 @@ public class Radio {
     }
 
     public void setMaxVolume() {
-        currentVolume = 10;
+        currentVolume = maxCurrentVolume;
     }
 
     public void prevVolume() {
-        if (currentVolume == 0) {
-            currentVolume = 0;
+        if (currentVolume == minCurrentVolume) {
+            currentVolume = minCurrentVolume;
             setCurrentVolume(currentVolume);
         }
 
